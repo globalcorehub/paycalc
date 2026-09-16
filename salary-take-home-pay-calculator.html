@@ -89,6 +89,18 @@
     ::-webkit-scrollbar-track { background: #f1f5f9; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    #tool-search, #search-section, [data-search-target] {
+      scroll-margin-top: 130px;
+    }
+    @keyframes search-glow-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    .search-highlight-pulse {
+      animation: search-glow-pulse 0.4s ease-in-out 2;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.45) !important;
+      border-color: rgb(59, 130, 246) !important;
+    }
   </style>
 
   <!-- Structured Data JSON-LD (WebSite & SearchAction) -->
@@ -270,7 +282,7 @@
         <!-- Right Side: Search Icon, Language Selector & Mobile Drawer Button -->
         <div class="flex items-center space-x-2">
           <!-- Search Link -->
-          <a href="/#tool-search" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition" title="Search Calculators (Ctrl+K)">
+          <a href="/?focus_search=1#tool-search" id="nav-search-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition cursor-pointer" title="Search Calculators (Ctrl+K)">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           </a>
 
@@ -330,6 +342,13 @@
 
     <!-- Mobile Drawer Menu -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-2">
+      <a href="/?focus_search=1#tool-search" class="mobile-search-link flex items-center justify-between px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-mono text-slate-600 dark:text-slate-300">
+        <span class="flex items-center space-x-2">
+          <svg class="w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <span>Search tools by keyword, format... (Press / to focus)</span>
+        </span>
+        <kbd class="text-[10px] px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-700 opacity-60 bg-white dark:bg-slate-900 font-mono">/</kbd>
+      </a>
       <a href="/" class="block px-3 py-2 rounded-lg text-sm font-bold ">
         Home
       </a>
@@ -735,6 +754,61 @@
         setTimeout(() => toast.remove(), 300);
       }, 2000);
     };
+
+    // Smooth Centered Search Focus Runtime
+    window.focusAndCenterSearch = function() {
+      const searchInput = document.getElementById('tool-search');
+      if (searchInput) {
+        searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+          try {
+            searchInput.focus({ preventScroll: true });
+            searchInput.select();
+          } catch(e) {
+            searchInput.focus();
+          }
+          searchInput.classList.add('search-highlight-pulse');
+          setTimeout(() => searchInput.classList.remove('search-highlight-pulse'), 1200);
+        }, 300);
+        return true;
+      } else {
+        window.location.href = '/?focus_search=1#tool-search';
+        return false;
+      }
+    };
+
+    // Intercept clicks on top nav search & mobile search
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('#nav-search-btn, .mobile-search-link, a[href*="#tool-search"]');
+      if (btn && document.getElementById('tool-search')) {
+        e.preventDefault();
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+        }
+        if (history.replaceState) history.replaceState(null, '', '#tool-search');
+        window.focusAndCenterSearch();
+      }
+    });
+
+    // Auto focus when loading with #tool-search or focus_search=1
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const shouldFocus = window.location.hash === '#tool-search' || params.get('focus_search') === '1' || params.has('q');
+      if (shouldFocus && document.getElementById('tool-search')) {
+        setTimeout(window.focusAndCenterSearch, 250);
+      }
+    });
+
+    // Global Keyboard Shortcuts (Ctrl+K or /)
+    document.addEventListener('keydown', (e) => {
+      const isSearchKey = (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) ||
+                          (e.key.toLowerCase() === 'k' && (e.ctrlKey || e.metaKey));
+      if (isSearchKey) {
+        e.preventDefault();
+        window.focusAndCenterSearch();
+      }
+    });
   })();
   </script>
 </body>
