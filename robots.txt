@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://paycalc.globalcorehub.com/sitemap.xml
