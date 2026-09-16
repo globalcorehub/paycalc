@@ -50,9 +50,9 @@
   <script>
     (function() {
       try {
-        var t = localStorage.getItem('agy_theme') || 'swiss_minimal';
+        var t = 'swiss_minimal';
         document.documentElement.setAttribute('data-theme', t);
-        if (t === 'swiss_minimal') {
+        if (t === 'swiss_minimal' || t === 'apple_bento_glass') {
           document.documentElement.classList.remove('dark');
         } else {
           document.documentElement.classList.add('dark');
@@ -168,6 +168,38 @@
       color: #0f172a !important;
       border-color: #cbd5e1 !important;
     }
+
+    html[data-theme="apple_bento_glass"] body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+    }
+    html[data-theme="apple_bento_glass"] .bg-\[\#0c0e14\],
+    html[data-theme="apple_bento_glass"] .bg-\[\#fafaf9\] { background-color: #f8fafc !important; }
+    html[data-theme="apple_bento_glass"] header {
+      background-color: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(20px) !important;
+      border-color: rgba(226, 232, 240, 0.8) !important;
+    }
+    html[data-theme="apple_bento_glass"] .border-\[\#1e2333\],
+    html[data-theme="apple_bento_glass"] .border-\[\#3b1d68\] { border-color: #e2e8f0 !important; }
+    html[data-theme="apple_bento_glass"] .text-\[\#e2e8f0\],
+    html[data-theme="apple_bento_glass"] .text-\[\#cbd5e1\],
+    html[data-theme="apple_bento_glass"] .text-\[\#e9d5ff\] { color: #0f172a !important; }
+    html[data-theme="apple_bento_glass"] .text-\[\#10b981\] { color: #0284c7 !important; }
+    html[data-theme="apple_bento_glass"] .bg-\[\#10b981\] { background-color: #0284c7 !important; color: #ffffff !important; }
+    html[data-theme="apple_bento_glass"] .bg-\[\#10b981\]\/10 { background-color: rgba(2, 132, 199, 0.1) !important; }
+    html[data-theme="apple_bento_glass"] .border-\[\#10b981\]\/30 { border-color: rgba(2, 132, 199, 0.25) !important; }
+    html[data-theme="apple_bento_glass"] [style*="color: #10b981"],
+    html[data-theme="apple_bento_glass"] [style*="color:#10b981"] { color: #0284c7 !important; }
+    html[data-theme="apple_bento_glass"] #header-terminal-dots { display: none !important; }
+    html[data-theme="apple_bento_glass"] input,
+    html[data-theme="apple_bento_glass"] textarea,
+    html[data-theme="apple_bento_glass"] select {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
   </style>
 
   <!-- Structured Data JSON-LD (WebSite & SearchAction) -->
@@ -251,9 +283,11 @@
         
 
         <a href="/zh/" class="flex items-center space-x-2.5 sm:space-x-3 group">
-          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center font-black text-base sm:text-lg bg-[#0f172a] hover:bg-[#334155] dark:bg-[#2563eb] dark:hover:bg-[#1d4ed8] text-white font-semibold">
-            P
+          
+          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center font-bold text-sm bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
           </div>
+          
           <span class="text-base sm:text-lg font-extrabold tracking-tight truncate max-w-[150px] sm:max-w-none">
             PayCalc - Salary & Compensation Suite
           </span>
@@ -367,49 +401,7 @@
           <kbd class="hidden sm:inline text-[9px] px-1 py-0.5 rounded border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] opacity-50 bg-black/20 font-mono">Ctrl+K</kbd>
         </button>
 
-        <!-- Interactive Multi-Theme Selector Dropdown -->
-        <div class="relative inline-block text-left" id="theme-selector-container">
-          <button id="theme-toggle-btn" type="button" class="inline-flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-mono border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] hover:opacity-90 transition bg-black/20" title="界面主题风格">
-            <span id="theme-current-icon" class="text-sm leading-none">🖤</span>
-            <span id="theme-current-name" class="hidden xl:inline text-xs font-medium">极客终端黑</span>
-            <svg class="w-3 h-3 opacity-60 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </button>
-          <div id="theme-dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-xl bg-white dark:bg-[#1e293b] border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-none z-50 py-1.5 font-mono text-xs shadow-2xl backdrop-blur-xl">
-            <div class="px-3 py-1 text-[10px] uppercase tracking-wider opacity-50 border-b border-white/10 mb-1">
-              界面主题风格
-            </div>
-            <button type="button" onclick="window.switchTheme('terminal_dev', true)" data-theme-opt="terminal_dev" class="w-full flex items-center justify-between px-3 py-2 hover:bg-white/10 transition text-left group">
-              <div class="flex items-center space-x-2">
-                <span class="w-3 h-3 rounded-full bg-[#10b981] inline-block shadow-[0_0_6px_#10b981]"></span>
-                <span class="font-medium group-hover:text-emerald-400 transition">极客终端黑</span>
-              </div>
-              <span class="theme-check text-emerald-400 font-bold opacity-0">&check;</span>
-            </button>
-            <button type="button" onclick="window.switchTheme('cyber_electric', true)" data-theme-opt="cyber_electric" class="w-full flex items-center justify-between px-3 py-2 hover:bg-white/10 transition text-left group">
-              <div class="flex items-center space-x-2">
-                <span class="w-3 h-3 rounded-full bg-[#38bdf8] inline-block shadow-[0_0_6px_#38bdf8]"></span>
-                <span class="font-medium group-hover:text-sky-400 transition">赛博霓虹蓝</span>
-              </div>
-              <span class="theme-check text-sky-400 font-bold opacity-0">&check;</span>
-            </button>
-            <button type="button" onclick="window.switchTheme('midnight_purple', true)" data-theme-opt="midnight_purple" class="w-full flex items-center justify-between px-3 py-2 hover:bg-white/10 transition text-left group">
-              <div class="flex items-center space-x-2">
-                <span class="w-3 h-3 rounded-full bg-[#c084fc] inline-block shadow-[0_0_6px_#c084fc]"></span>
-                <span class="font-medium group-hover:text-purple-400 transition">暗夜魅影紫</span>
-              </div>
-              <span class="theme-check text-purple-400 font-bold opacity-0">&check;</span>
-            </button>
-            <button type="button" onclick="window.switchTheme('swiss_minimal', true)" data-theme-opt="swiss_minimal" class="w-full flex items-center justify-between px-3 py-2 hover:bg-white/10 transition text-left group">
-              <div class="flex items-center space-x-2">
-                <span class="w-3 h-3 rounded-full bg-[#2563eb] inline-block shadow-[0_0_6px_#2563eb]"></span>
-                <span class="font-medium group-hover:text-blue-500 transition">现代极简白</span>
-              </div>
-              <span class="theme-check text-blue-500 font-bold opacity-0">&check;</span>
-            </button>
-          </div>
-        </div>
+
 
         <!-- 7-Language International Dropdown -->
         <div class="relative inline-block text-left" id="lang-container">
@@ -474,28 +466,7 @@
     <div id="mobile-menu" class="hidden md:hidden border-t border-[#e7e5e4] dark:border-[#334155] bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-lg px-4 pt-3 pb-5 space-y-2 backdrop-blur-lg">
       <a href="/zh/" class="block px-3 py-2 rounded-xl text-sm font-semibold hover:bg-white/10 transition">首页</a>
 
-      <!-- Mobile Theme Switcher Bar -->
-      <div class="py-2 border-b border-white/10 mb-2">
-        <div class="text-[10px] uppercase font-mono opacity-50 mb-1.5">界面主题风格</div>
-        <div class="grid grid-cols-4 gap-1.5">
-          <button onclick="window.switchTheme('terminal_dev', true)" title="极客终端黑" class="p-1.5 rounded-lg border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/20 flex flex-col items-center text-[10px] font-mono hover:bg-white/10 transition">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#10b981] mb-1"></span>
-            <span class="truncate max-w-full">极客终端</span>
-          </button>
-          <button onclick="window.switchTheme('cyber_electric', true)" title="赛博霓虹蓝" class="p-1.5 rounded-lg border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/20 flex flex-col items-center text-[10px] font-mono hover:bg-white/10 transition">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#38bdf8] mb-1"></span>
-            <span class="truncate max-w-full">赛博霓虹</span>
-          </button>
-          <button onclick="window.switchTheme('midnight_purple', true)" title="暗夜魅影紫" class="p-1.5 rounded-lg border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/20 flex flex-col items-center text-[10px] font-mono hover:bg-white/10 transition">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#c084fc] mb-1"></span>
-            <span class="truncate max-w-full">暗夜魅影</span>
-          </button>
-          <button onclick="window.switchTheme('swiss_minimal', true)" title="现代极简白" class="p-1.5 rounded-lg border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/20 flex flex-col items-center text-[10px] font-mono hover:bg-white/10 transition">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#2563eb] mb-1"></span>
-            <span class="truncate max-w-full">现代极简</span>
-          </button>
-        </div>
-      </div>
+
 
       <!-- Quick Search Trigger in Mobile Drawer -->
       <button id="mobile-search-trigger" type="button" class="w-full flex items-center justify-between px-3 py-2 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/20 text-xs font-mono opacity-80">
@@ -560,127 +531,246 @@
     
 
     
-        <div class="max-w-7xl mx-auto">
-          <!-- Hero Banner (Mobile & Desktop Responsive) -->
-          <div class="text-center py-8 sm:py-12 md:py-16">
-            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs font-mono mb-4 sm:mb-5">
-              <span>薪资个税与期权激励精密计算套件</span>
-            </div>
-            <h1 class="text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tight mb-3 sm:mb-4">
-              PayCalc - Salary & Compensation Suite
-            </h1>
-            <p class="max-w-2xl mx-auto text-xs sm:text-sm md:text-base opacity-75 leading-relaxed px-2">
-              精确测算税前税后实发工资、阶梯边际税率、时薪年薪折算、股票期权 RSU 归属及长期养老复利增长，100% 本地运行保护隐私。
-            </p>
+    <div class="max-w-7xl mx-auto px-2 sm:px-4">
+      <!-- Top Financial Indicator Ticker / Benchmark Bar -->
+      <div class="mb-6 sm:mb-8 p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs font-mono text-slate-600 dark:text-slate-400">
+        <div class="flex items-center space-x-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="font-bold text-slate-800 dark:text-slate-200">2024–2025 官方个税与薪酬基准参考数据:</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">联邦基本扣除额: $14,600 / $29,200</span>
+          <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">社保与医保 FICA: 7.65%</span>
+          <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">401(k) 年度限额: $23,000</span>
+        </div>
+      </div>
+
+      <!-- Split-Screen Financial Workspace Hero -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start mb-12 sm:mb-16">
+        <div class="lg:col-span-6 space-y-4 sm:space-y-5">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 text-xs font-semibold">
+            <span>薪资个税与期权激励精密计算套件</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 leading-tight">
+            PayCalc - Salary & Compensation Suite
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            精确测算税前税后实发工资、阶梯边际税率、时薪年薪折算、股票期权 RSU 归属及长期养老复利增长，100% 本地运行保护隐私。
+          </p>
+
+          <div class="p-3.5 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-xs text-emerald-800 dark:text-emerald-300 font-mono flex items-center space-x-2.5">
+            <svg class="w-4 h-4 flex-shrink-0 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <span>100% 本地沙箱运算：薪酬资产等隐私数据绝对不离开您的浏览器内存。</span>
           </div>
 
-          <!-- Real-Time Interactive Filter & Search Bar -->
-          <div class="max-w-2xl mx-auto mb-8 sm:mb-12 px-2">
+          <div class="pt-2">
             <div class="relative flex items-center">
-              <div class="absolute left-4 opacity-50 pointer-events-none">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
+              <div class="absolute left-3.5 opacity-50 pointer-events-none">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
               </div>
-              <input type="text" id="tool-search" placeholder="按工具名称、长尾关键词或文件格式快速查找... (按 / 聚焦)" class="w-full pl-11 pr-20 py-3 sm:py-3.5 rounded-2xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/10 dark:bg-black/30 text-xs sm:text-sm font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition">
-              <div class="absolute right-3.5 flex items-center space-x-1.5">
-                <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono rounded border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] opacity-50 bg-black/20">Ctrl+K</kbd>
+              <input type="text" id="tool-search" placeholder="按工具名称、长尾关键词或文件格式快速查找... (按 / 聚焦)" class="w-full pl-10 pr-20 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs sm:text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+              <div class="absolute right-3 flex items-center space-x-1.5">
+                <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono rounded border border-slate-300 dark:border-slate-700 opacity-60 bg-slate-100 dark:bg-slate-800">Ctrl+K</kbd>
                 <button id="btn-clear-search" class="hidden text-xs opacity-60 hover:opacity-100 font-mono px-1">&times;</button>
               </div>
             </div>
-            <div class="flex items-center justify-between text-[11px] font-mono opacity-60 mt-2.5 px-1">
+            <div class="flex items-center justify-between text-[11px] font-mono text-slate-500 mt-2 px-1">
               <span id="search-stats">显示全部 7 个开发者工具</span>
               <span class="hidden sm:inline">100% 浏览器纯前端运算</span>
             </div>
           </div>
-
-          <!-- Empty State (Hidden by default) -->
-          <div id="no-tools-found" class="hidden text-center py-12 px-4 rounded-2xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/5 dark:bg-white/5 mb-12">
-            <p class="text-sm font-mono opacity-75 mb-3">未找到符合条件的开发者工具，请尝试其他关键词。</p>
-            <button id="btn-reset-filter" class="px-4 py-1.5 rounded-xl text-xs font-mono font-bold border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] hover:bg-white/10 transition">
-              重置筛选
-            </button>
-          </div>
-
-          <!-- Grid of Tools (1 col mobile, 2 cols tablet, 3 cols desktop) -->
-          <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5 mb-12 sm:mb-16">
-            <a href="/zh/salary-take-home-pay-calculator" data-search="薪资与实发工资计算器 - 税前税后收入与五险一金社保扣缴测算 基于最新累进税率、个税免征额与五险一金扣缴基数，精确计算每期发薪与年度实际到手工资，保护您的薪酬隐私。 实发工资计算器 在线 税后工资计算器 薪资扣税测算 到手工资测算 五险一金扣除计算 税前税后换算 salary-take-home-pay-calculator" class="tool-card bg-white dark:bg-[#1e293b] rounded-xl p-5 sm:p-6 border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-none transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-3"><span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium">TOOL</span><span class="text-[11px] opacity-50 font-mono">100% 本地运算</span></div><h3 class="text-base sm:text-lg font-bold group-hover:underline transition mb-2 tracking-tight">薪资与实发工资计算器 - 税前税后收入与五险一金社保扣缴测算</h3><p class="text-xs opacity-75 line-clamp-2 mb-4 leading-relaxed">基于最新累进税率、个税免征额与五险一金扣缴基数，精确计算每期发薪与年度实际到手工资，保护您的薪酬隐私。</p></div><div><div class="flex flex-wrap mb-3"><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#实发工资计算器 在线</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#税后工资计算器</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#薪资扣税测算</span></div><div class="text-xs font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform" style="color: #2563eb"><span>立即开启</span><span>&rarr;</span></div></div></a>
-<a href="/zh/tax-bracket-calculator" data-search="阶梯个税税率与税阶计算器 - 边际税率与实际综合税负测算 直观分解应纳税所得额在各级累进税阶中的分布，清晰对比边际最高税率与整体实际税负，提供税收筹划洞察。 阶梯税率计算器 边际税率测算 个人所得税税率表 综合所得税阶 实际税负率计算 tax-bracket-calculator" class="tool-card bg-white dark:bg-[#1e293b] rounded-xl p-5 sm:p-6 border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-none transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-3"><span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium">TOOL</span><span class="text-[11px] opacity-50 font-mono">100% 本地运算</span></div><h3 class="text-base sm:text-lg font-bold group-hover:underline transition mb-2 tracking-tight">阶梯个税税率与税阶计算器 - 边际税率与实际综合税负测算</h3><p class="text-xs opacity-75 line-clamp-2 mb-4 leading-relaxed">直观分解应纳税所得额在各级累进税阶中的分布，清晰对比边际最高税率与整体实际税负，提供税收筹划洞察。</p></div><div><div class="flex flex-wrap mb-3"><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#阶梯税率计算器</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#边际税率测算</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#个人所得税税率表</span></div><div class="text-xs font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform" style="color: #2563eb"><span>立即开启</span><span>&rarr;</span></div></div></a>
-<a href="/zh/hourly-to-salary-converter" data-search="时薪与年薪在线转换器 - 包含加班工时与带薪年假的薪酬换算 自由在时薪、日薪、双周薪、月薪与年薪之间相互转换，支持自定义每周工时、加班上浮倍数与有薪休假扣除。 时薪转年薪计算器 小时工薪资换算 时薪折算月薪 加班工资折算 年薪时薪对比 hourly-to-salary-converter" class="tool-card bg-white dark:bg-[#1e293b] rounded-xl p-5 sm:p-6 border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-none transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-3"><span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium">TOOL</span><span class="text-[11px] opacity-50 font-mono">100% 本地运算</span></div><h3 class="text-base sm:text-lg font-bold group-hover:underline transition mb-2 tracking-tight">时薪与年薪在线转换器 - 包含加班工时与带薪年假的薪酬换算</h3><p class="text-xs opacity-75 line-clamp-2 mb-4 leading-relaxed">自由在时薪、日薪、双周薪、月薪与年薪之间相互转换，支持自定义每周工时、加班上浮倍数与有薪休假扣除。</p></div><div><div class="flex flex-wrap mb-3"><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#时薪转年薪计算器</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#小时工薪资换算</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#时薪折算月薪</span></div><div class="text-xs font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform" style="color: #2563eb"><span>立即开启</span><span>&rarr;</span></div></div></a>
-<a href="/zh/stock-equity-vesting-calculator" data-search="股票期权与 rsu 限制性股票归属计算器 - 股权激励公允价值与归属测算 输入总期权股数、行权成本与目标股价，精确测算入职4年均等归属（含满1年25% cliff）的已归属现值与未归属潜在收益。 期权归属计算器 rsu股权估值 股票期权vesting计算 期权行权收益测算 员工持股计划估值 stock-equity-vesting-calculator" class="tool-card bg-white dark:bg-[#1e293b] rounded-xl p-5 sm:p-6 border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-none transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-3"><span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium">TOOL</span><span class="text-[11px] opacity-50 font-mono">100% 本地运算</span></div><h3 class="text-base sm:text-lg font-bold group-hover:underline transition mb-2 tracking-tight">股票期权与 RSU 限制性股票归属计算器 - 股权激励公允价值与归属测算</h3><p class="text-xs opacity-75 line-clamp-2 mb-4 leading-relaxed">输入总期权股数、行权成本与目标股价，精确测算入职4年均等归属（含满1年25% Cliff）的已归属现值与未归属潜在收益。</p></div><div><div class="flex flex-wrap mb-3"><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#期权归属计算器</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#rsu股权估值</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#股票期权vesting计算</span></div><div class="text-xs font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform" style="color: #2563eb"><span>立即开启</span><span>&rarr;</span></div></div></a>
-<a href="/zh/401k-retirement-contribution-calculator" data-search="401(k) 与养老公积金投资计算器 - 雇主匹配补贴与年化复利滚存测算 测算长期养老投资账户资产增值，清晰拆解个人累计本金投入、雇主匹配免费补贴以及数十年复利滚存产生的巨额收益。 养老金计算器 401k复利测算 企业年金公积金测算 养老投资回报率 退休储蓄规划 401k-retirement-contribution-calculator" class="tool-card bg-white dark:bg-[#1e293b] rounded-xl p-5 sm:p-6 border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-none transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-3"><span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium">TOOL</span><span class="text-[11px] opacity-50 font-mono">100% 本地运算</span></div><h3 class="text-base sm:text-lg font-bold group-hover:underline transition mb-2 tracking-tight">401(k) 与养老公积金投资计算器 - 雇主匹配补贴与年化复利滚存测算</h3><p class="text-xs opacity-75 line-clamp-2 mb-4 leading-relaxed">测算长期养老投资账户资产增值，清晰拆解个人累计本金投入、雇主匹配免费补贴以及数十年复利滚存产生的巨额收益。</p></div><div><div class="flex flex-wrap mb-3"><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#养老金计算器</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#401k复利测算</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#企业年金公积金测算</span></div><div class="text-xs font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform" style="color: #2563eb"><span>立即开启</span><span>&rarr;</span></div></div></a>
-<a href="/zh/bonus-tax-withholding-calculator" data-search="年终奖与绩效奖金税后计算器 - 补充工资单独计税与综合预扣测算 清晰预估绩效奖金或年终奖的税后实发金额，避免由于大额奖金单独计税预扣导致的心理预期偏差。 年终奖扣税计算器 奖金到手计算 绩效奖金个税计算 大额奖金单独计税 年终奖实际到手 bonus-tax-withholding-calculator" class="tool-card bg-white dark:bg-[#1e293b] rounded-xl p-5 sm:p-6 border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-none transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-3"><span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium">TOOL</span><span class="text-[11px] opacity-50 font-mono">100% 本地运算</span></div><h3 class="text-base sm:text-lg font-bold group-hover:underline transition mb-2 tracking-tight">年终奖与绩效奖金税后计算器 - 补充工资单独计税与综合预扣测算</h3><p class="text-xs opacity-75 line-clamp-2 mb-4 leading-relaxed">清晰预估绩效奖金或年终奖的税后实发金额，避免由于大额奖金单独计税预扣导致的心理预期偏差。</p></div><div><div class="flex flex-wrap mb-3"><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#年终奖扣税计算器</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#奖金到手计算</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#绩效奖金个税计算</span></div><div class="text-xs font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform" style="color: #2563eb"><span>立即开启</span><span>&rarr;</span></div></div></a>
-<a href="/zh/freelance-1099-self-employment-tax-calculator" data-search="自由职业与 1099 自雇税测算器 - 扣除经营成本后的净利润与季度预缴税估算 针对独立咨询顾问、自由职业者与数字游民，核算自雇社保税(15.3%)、经营开支抵扣与每季度需预留预缴的个税金额。 自由职业者报税计算器 1099自雇税测算 个体工商户个税计算 季度预缴税估算 劳务报酬所得税计算 freelance-1099-self-employment-tax-calculator" class="tool-card bg-white dark:bg-[#1e293b] rounded-xl p-5 sm:p-6 border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-none transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-3"><span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium">TOOL</span><span class="text-[11px] opacity-50 font-mono">100% 本地运算</span></div><h3 class="text-base sm:text-lg font-bold group-hover:underline transition mb-2 tracking-tight">自由职业与 1099 自雇税测算器 - 扣除经营成本后的净利润与季度预缴税估算</h3><p class="text-xs opacity-75 line-clamp-2 mb-4 leading-relaxed">针对独立咨询顾问、自由职业者与数字游民，核算自雇社保税(15.3%)、经营开支抵扣与每季度需预留预缴的个税金额。</p></div><div><div class="flex flex-wrap mb-3"><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#自由职业者报税计算器</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#1099自雇税测算</span><span class='inline-block bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium text-[11px] sm:text-xs px-2 py-0.5 rounded mr-1.5 mb-1.5 font-mono'>#个体工商户个税计算</span></div><div class="text-xs font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform" style="color: #2563eb"><span>立即开启</span><span>&rarr;</span></div></div></a>
-          </div>
         </div>
 
-        <script>
-        (function() {
-          const searchInput = document.getElementById('tool-search');
-          const clearBtn = document.getElementById('btn-clear-search');
-          const resetBtn = document.getElementById('btn-reset-filter');
-          const emptyState = document.getElementById('no-tools-found');
-          const cards = Array.from(document.querySelectorAll('.tool-card'));
-          const statsEl = document.getElementById('search-stats');
-          const totalCards = cards.length;
+        <div class="lg:col-span-6 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700/80 rounded-2xl p-5 sm:p-7 shadow-lg">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3.5 mb-4">
+            <div class="flex items-center space-x-2">
+              <span class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100">即时工资手头净收入快速估算器</span>
+            </div>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-bold">LIVE SANDBOX</span>
+          </div>
 
-          function filterCards() {
-            const query = searchInput.value.trim().toLowerCase();
-            clearBtn.classList.toggle('hidden', !query);
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 font-mono">税前年薪 (Gross Annual Salary)</label>
+              <input type="number" id="swiss-quick-salary" value="75000" step="1000" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-mono text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 font-mono">发薪周期</label>
+              <select id="swiss-quick-freq" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-mono text-xs font-bold focus:ring-2 focus:ring-blue-500 outline-none">
+                <option value="12">按月发放 (12次/年)</option>
+                <option value="26" selected>双周发放 (26次/年)</option>
+                <option value="1">按年计算</option>
+              </select>
+            </div>
+          </div>
 
-            let visibleCount = 0;
-            cards.forEach(card => {
-              const corpus = card.getAttribute('data-search') || '';
-              const matches = !query || corpus.includes(query);
-              card.style.display = matches ? '' : 'none';
-              if (matches) visibleCount++;
-            });
+          <div class="bg-slate-50 dark:bg-slate-800/60 rounded-xl p-4 border border-slate-200 dark:border-slate-700 mb-4 space-y-2.5">
+            <div class="flex items-baseline justify-between">
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400">预计每期税后实发工资 (Net Take-Home) (每期实收):</span>
+              <span id="swiss-net-display" class="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">$2,284</span>
+            </div>
+            <div class="h-px bg-slate-200 dark:bg-slate-700 my-1"></div>
+            <div class="grid grid-cols-3 gap-2 text-[11px] font-mono">
+              <div>
+                <span class="block text-slate-500 dark:text-slate-400">预估联邦所得税:</span>
+                <span id="swiss-fed-display" class="font-bold text-slate-700 dark:text-slate-200">$438</span>
+              </div>
+              <div>
+                <span class="block text-slate-500 dark:text-slate-400">社保与医保代扣 (FICA):</span>
+                <span id="swiss-fica-display" class="font-bold text-slate-700 dark:text-slate-200">$221</span>
+              </div>
+              <div>
+                <span class="block text-slate-500 dark:text-slate-400">综合有效税率:</span>
+                <span id="swiss-rate-display" class="font-bold text-blue-600 dark:text-blue-400">22.4%</span>
+              </div>
+            </div>
+          </div>
 
-            if (statsEl) {
-              statsEl.innerText = query ? ('已匹配 __N__ / __TOTAL__ 个工具'.replace('__N__', visibleCount).replace('__TOTAL__', totalCards)) : ('显示全部 __N__ 个开发者工具'.replace('__N__', totalCards));
-            }
+          <div class="text-right">
+            <a href="/zh/salary-take-home-pay-calculator" class="inline-flex items-center text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">
+              <span>打开完整薪资精密测算引擎 →</span>
+            </a>
+          </div>
+        </div>
+      </div>
 
-            if (emptyState) {
-              emptyState.classList.toggle('hidden', visibleCount > 0);
-            }
+      <!-- Empty State -->
+      <div id="no-tools-found" class="hidden text-center py-12 px-4 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 mb-12">
+        <p class="text-sm font-mono text-slate-600 dark:text-slate-300 mb-3">未找到符合条件的开发者工具，请尝试其他关键词。</p>
+        <button id="btn-reset-filter" class="px-4 py-1.5 rounded-xl text-xs font-mono font-bold border border-slate-400 dark:border-slate-600 hover:bg-slate-200 transition">
+          重置筛选
+        </button>
+      </div>
+
+      <!-- Section: Financial Calculation Engines & Tools Grid -->
+      <div class="mb-6">
+        <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">薪资薪酬与个税期权核心计算引擎</h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400">点击下方专业工具模块或通过上方搜索框即时定位</p>
+      </div>
+      <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-12 sm:mb-16">
+        <a href="/zh/salary-take-home-pay-calculator" data-search="薪资与实发工资计算器 - 税前税后收入与五险一金社保扣缴测算 基于最新累进税率、个税免征额与五险一金扣缴基数，精确计算每期发薪与年度实际到手工资，保护您的薪酬隐私。 实发工资计算器 在线 税后工资计算器 薪资扣税测算 到手工资测算 五险一金扣除计算 税前税后换算 salary-take-home-pay-calculator" class="tool-card bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 hover:border-blue-600 shadow-sm transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-2"><span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-semibold">TOOL</span><span class="text-[10px] text-slate-400 font-mono">100% Client-Side</span></div><h3 class="text-base font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 transition mb-1.5">薪资与实发工资计算器 - 税前税后收入与五险一金社保扣缴测算</h3><p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3 leading-relaxed">基于最新累进税率、个税免征额与五险一金扣缴基数，精确计算每期发薪与年度实际到手工资，保护您的薪酬隐私。</p></div><div><div class="flex flex-wrap mb-2.5"><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#实发工资计算器 在线</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#税后工资计算器</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#薪资扣税测算</span></div><div class="text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center space-x-1 group-hover:translate-x-1 transition-transform"><span>立即开启</span><span>&rarr;</span></div></div></a>
+<a href="/zh/tax-bracket-calculator" data-search="阶梯个税税率与税阶计算器 - 边际税率与实际综合税负测算 直观分解应纳税所得额在各级累进税阶中的分布，清晰对比边际最高税率与整体实际税负，提供税收筹划洞察。 阶梯税率计算器 边际税率测算 个人所得税税率表 综合所得税阶 实际税负率计算 tax-bracket-calculator" class="tool-card bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 hover:border-blue-600 shadow-sm transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-2"><span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-semibold">TOOL</span><span class="text-[10px] text-slate-400 font-mono">100% Client-Side</span></div><h3 class="text-base font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 transition mb-1.5">阶梯个税税率与税阶计算器 - 边际税率与实际综合税负测算</h3><p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3 leading-relaxed">直观分解应纳税所得额在各级累进税阶中的分布，清晰对比边际最高税率与整体实际税负，提供税收筹划洞察。</p></div><div><div class="flex flex-wrap mb-2.5"><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#阶梯税率计算器</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#边际税率测算</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#个人所得税税率表</span></div><div class="text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center space-x-1 group-hover:translate-x-1 transition-transform"><span>立即开启</span><span>&rarr;</span></div></div></a>
+<a href="/zh/hourly-to-salary-converter" data-search="时薪与年薪在线转换器 - 包含加班工时与带薪年假的薪酬换算 自由在时薪、日薪、双周薪、月薪与年薪之间相互转换，支持自定义每周工时、加班上浮倍数与有薪休假扣除。 时薪转年薪计算器 小时工薪资换算 时薪折算月薪 加班工资折算 年薪时薪对比 hourly-to-salary-converter" class="tool-card bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 hover:border-blue-600 shadow-sm transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-2"><span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-semibold">TOOL</span><span class="text-[10px] text-slate-400 font-mono">100% Client-Side</span></div><h3 class="text-base font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 transition mb-1.5">时薪与年薪在线转换器 - 包含加班工时与带薪年假的薪酬换算</h3><p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3 leading-relaxed">自由在时薪、日薪、双周薪、月薪与年薪之间相互转换，支持自定义每周工时、加班上浮倍数与有薪休假扣除。</p></div><div><div class="flex flex-wrap mb-2.5"><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#时薪转年薪计算器</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#小时工薪资换算</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#时薪折算月薪</span></div><div class="text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center space-x-1 group-hover:translate-x-1 transition-transform"><span>立即开启</span><span>&rarr;</span></div></div></a>
+<a href="/zh/stock-equity-vesting-calculator" data-search="股票期权与 rsu 限制性股票归属计算器 - 股权激励公允价值与归属测算 输入总期权股数、行权成本与目标股价，精确测算入职4年均等归属（含满1年25% cliff）的已归属现值与未归属潜在收益。 期权归属计算器 rsu股权估值 股票期权vesting计算 期权行权收益测算 员工持股计划估值 stock-equity-vesting-calculator" class="tool-card bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 hover:border-blue-600 shadow-sm transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-2"><span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-semibold">TOOL</span><span class="text-[10px] text-slate-400 font-mono">100% Client-Side</span></div><h3 class="text-base font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 transition mb-1.5">股票期权与 RSU 限制性股票归属计算器 - 股权激励公允价值与归属测算</h3><p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3 leading-relaxed">输入总期权股数、行权成本与目标股价，精确测算入职4年均等归属（含满1年25% Cliff）的已归属现值与未归属潜在收益。</p></div><div><div class="flex flex-wrap mb-2.5"><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#期权归属计算器</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#rsu股权估值</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#股票期权vesting计算</span></div><div class="text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center space-x-1 group-hover:translate-x-1 transition-transform"><span>立即开启</span><span>&rarr;</span></div></div></a>
+<a href="/zh/401k-retirement-contribution-calculator" data-search="401(k) 与养老公积金投资计算器 - 雇主匹配补贴与年化复利滚存测算 测算长期养老投资账户资产增值，清晰拆解个人累计本金投入、雇主匹配免费补贴以及数十年复利滚存产生的巨额收益。 养老金计算器 401k复利测算 企业年金公积金测算 养老投资回报率 退休储蓄规划 401k-retirement-contribution-calculator" class="tool-card bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 hover:border-blue-600 shadow-sm transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-2"><span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-semibold">TOOL</span><span class="text-[10px] text-slate-400 font-mono">100% Client-Side</span></div><h3 class="text-base font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 transition mb-1.5">401(k) 与养老公积金投资计算器 - 雇主匹配补贴与年化复利滚存测算</h3><p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3 leading-relaxed">测算长期养老投资账户资产增值，清晰拆解个人累计本金投入、雇主匹配免费补贴以及数十年复利滚存产生的巨额收益。</p></div><div><div class="flex flex-wrap mb-2.5"><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#养老金计算器</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#401k复利测算</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#企业年金公积金测算</span></div><div class="text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center space-x-1 group-hover:translate-x-1 transition-transform"><span>立即开启</span><span>&rarr;</span></div></div></a>
+<a href="/zh/bonus-tax-withholding-calculator" data-search="年终奖与绩效奖金税后计算器 - 补充工资单独计税与综合预扣测算 清晰预估绩效奖金或年终奖的税后实发金额，避免由于大额奖金单独计税预扣导致的心理预期偏差。 年终奖扣税计算器 奖金到手计算 绩效奖金个税计算 大额奖金单独计税 年终奖实际到手 bonus-tax-withholding-calculator" class="tool-card bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 hover:border-blue-600 shadow-sm transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-2"><span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-semibold">TOOL</span><span class="text-[10px] text-slate-400 font-mono">100% Client-Side</span></div><h3 class="text-base font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 transition mb-1.5">年终奖与绩效奖金税后计算器 - 补充工资单独计税与综合预扣测算</h3><p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3 leading-relaxed">清晰预估绩效奖金或年终奖的税后实发金额，避免由于大额奖金单独计税预扣导致的心理预期偏差。</p></div><div><div class="flex flex-wrap mb-2.5"><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#年终奖扣税计算器</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#奖金到手计算</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#绩效奖金个税计算</span></div><div class="text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center space-x-1 group-hover:translate-x-1 transition-transform"><span>立即开启</span><span>&rarr;</span></div></div></a>
+<a href="/zh/freelance-1099-self-employment-tax-calculator" data-search="自由职业与 1099 自雇税测算器 - 扣除经营成本后的净利润与季度预缴税估算 针对独立咨询顾问、自由职业者与数字游民，核算自雇社保税(15.3%)、经营开支抵扣与每季度需预留预缴的个税金额。 自由职业者报税计算器 1099自雇税测算 个体工商户个税计算 季度预缴税估算 劳务报酬所得税计算 freelance-1099-self-employment-tax-calculator" class="tool-card bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 hover:border-blue-600 shadow-sm transition-all duration-200 flex flex-col justify-between group"><div><div class="flex items-center justify-between mb-2"><span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-semibold">TOOL</span><span class="text-[10px] text-slate-400 font-mono">100% Client-Side</span></div><h3 class="text-base font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 transition mb-1.5">自由职业与 1099 自雇税测算器 - 扣除经营成本后的净利润与季度预缴税估算</h3><p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3 leading-relaxed">针对独立咨询顾问、自由职业者与数字游民，核算自雇社保税(15.3%)、经营开支抵扣与每季度需预留预缴的个税金额。</p></div><div><div class="flex flex-wrap mb-2.5"><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#自由职业者报税计算器</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#1099自雇税测算</span><span class='inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] px-2 py-0.5 rounded font-mono mr-1.5 mb-1.5'>#个体工商户个税计算</span></div><div class="text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center space-x-1 group-hover:translate-x-1 transition-transform"><span>立即开启</span><span>&rarr;</span></div></div></a>
+      </div>
+    </div>
+
+    <script>
+    (function() {
+      const salaryInput = document.getElementById('swiss-quick-salary');
+      const freqSelect = document.getElementById('swiss-quick-freq');
+      const netDisp = document.getElementById('swiss-net-display');
+      const fedDisp = document.getElementById('swiss-fed-display');
+      const ficaDisp = document.getElementById('swiss-fica-display');
+      const rateDisp = document.getElementById('swiss-rate-display');
+
+      function calcQuickPaycheck() {
+        const gross = parseFloat(salaryInput.value) || 0;
+        const periods = parseFloat(freqSelect.value) || 26;
+        if (gross <= 0) {
+          netDisp.innerText = '$0';
+          fedDisp.innerText = '$0';
+          ficaDisp.innerText = '$0';
+          rateDisp.innerText = '0.0%';
+          return;
+        }
+
+        const fica = gross * 0.0765;
+        const taxable = Math.max(0, gross - 14600);
+        let fed = 0;
+        if (taxable > 100525) fed = 17400 + (taxable - 100525) * 0.24;
+        else if (taxable > 47150) fed = 5426 + (taxable - 47150) * 0.22;
+        else if (taxable > 11600) fed = 1160 + (taxable - 11600) * 0.12;
+        else fed = taxable * 0.10;
+
+        const totalTax = fed + fica;
+        const netAnnual = Math.max(0, gross - totalTax);
+        const netPeriod = netAnnual / periods;
+        const fedPeriod = fed / periods;
+        const ficaPeriod = fica / periods;
+        const effRate = ((totalTax / gross) * 100).toFixed(1);
+
+        netDisp.innerText = '$' + Math.round(netPeriod).toLocaleString();
+        fedDisp.innerText = '$' + Math.round(fedPeriod).toLocaleString();
+        ficaDisp.innerText = '$' + Math.round(ficaPeriod).toLocaleString();
+        rateDisp.innerText = effRate + '%';
+      }
+
+      if (salaryInput && freqSelect) {
+        salaryInput.addEventListener('input', calcQuickPaycheck);
+        freqSelect.addEventListener('change', calcQuickPaycheck);
+        calcQuickPaycheck();
+      }
+
+      const searchInput = document.getElementById('tool-search');
+      const clearBtn = document.getElementById('btn-clear-search');
+      const resetBtn = document.getElementById('btn-reset-filter');
+      const emptyState = document.getElementById('no-tools-found');
+      const cards = Array.from(document.querySelectorAll('.tool-card'));
+      const statsEl = document.getElementById('search-stats');
+      const totalCards = cards.length;
+
+      function filterCards() {
+        const query = searchInput.value.trim().toLowerCase();
+        if (clearBtn) clearBtn.classList.toggle('hidden', !query);
+
+        let visibleCount = 0;
+        cards.forEach(card => {
+          const corpus = card.getAttribute('data-search') || '';
+          const matches = !query || corpus.includes(query);
+          card.style.display = matches ? '' : 'none';
+          if (matches) visibleCount++;
+        });
+
+        if (statsEl) {
+          statsEl.innerText = query ? ('已匹配 __N__ / __TOTAL__ 个工具'.replace('__N__', visibleCount).replace('__TOTAL__', totalCards)) : ('显示全部 __N__ 个开发者工具'.replace('__N__', totalCards));
+        }
+
+        if (emptyState) {
+          emptyState.classList.toggle('hidden', visibleCount > 0);
+        }
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', filterCards);
+
+        document.addEventListener('keydown', e => {
+          const isSearchKey = (e.key === '/' && document.activeElement !== searchInput && document.activeElement.tagName !== 'TEXTAREA' && document.activeElement.tagName !== 'INPUT') ||
+                              (e.key.toLowerCase() === 'k' && (e.ctrlKey || e.metaKey));
+          if (isSearchKey) {
+            e.preventDefault();
+            searchInput.focus();
+            searchInput.select();
           }
-
-          if (searchInput) {
-            searchInput.addEventListener('input', filterCards);
-
-            document.addEventListener('keydown', e => {
-              const isSearchKey = (e.key === '/' && document.activeElement !== searchInput && document.activeElement.tagName !== 'TEXTAREA' && document.activeElement.tagName !== 'INPUT') ||
-                                  (e.key.toLowerCase() === 'k' && (e.ctrlKey || e.metaKey));
-              if (isSearchKey) {
-                e.preventDefault();
-                searchInput.focus();
-                searchInput.select();
-              }
-              if (e.key === 'Escape' && document.activeElement === searchInput) {
-                searchInput.value = '';
-                filterCards();
-                searchInput.blur();
-              }
-            });
+          if (e.key === 'Escape' && document.activeElement === searchInput) {
+            searchInput.value = '';
+            filterCards();
+            searchInput.blur();
           }
+        });
+      }
 
-          if (clearBtn) {
-            clearBtn.addEventListener('click', () => {
-              searchInput.value = '';
-              filterCards();
-              searchInput.focus();
-            });
-          }
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          filterCards();
+          searchInput.focus();
+        });
+      }
 
-          if (resetBtn) {
-            resetBtn.addEventListener('click', () => {
-              searchInput.value = '';
-              filterCards();
-            });
-          }
-        })();
-        </script>
-        
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          filterCards();
+          searchInput.focus();
+        });
+      }
+    })();
+    </script>
+    
 
     
   </main>
