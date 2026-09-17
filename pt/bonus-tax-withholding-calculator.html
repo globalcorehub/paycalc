@@ -385,70 +385,7 @@
   </header>
 
   <!-- Main Content Container -->
-  <main class="flex-grow w-full py-6 sm:py-8">
-    
-    <!-- Semantic Breadcrumbs for Subpages -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-      <nav aria-label="Breadcrumb" class="flex items-center space-x-2 text-xs font-mono text-slate-500">
-        <a href="/pt/" class="hover:text-blue-600 transition flex items-center space-x-1">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-          <span>Início</span>
-        </a>
-        <span>/</span>
-        <a href="/pt/#tools-grid" class="hover:text-blue-600 transition">Todas as Ferramentas</a>
-        <span>/</span>
-        <span class="font-bold text-slate-900 dark:text-slate-100 truncate max-w-xs">Imposto s/ Bônus</span>
-      </nav>
-    </div>
-    
-
-    <div class="max-w-4xl mx-auto"><div class="bg-white dark:bg-[#1e293b] rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-none border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] p-4 sm:p-6 md:p-8"><div class="pb-5 border-b border-[#e7e5e4] dark:border-[#334155]"><h1 class="text-xl sm:text-2xl md:text-3xl font-black tracking-tight">Calculadora de Tributos e Impostos (Direta e Reversa)</h1><p class="text-xs sm:text-sm opacity-70 mt-1">Separação de Preço Líquido e Alíquota Fiscal</p></div><div class="mt-6"><div class="card p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
-  <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2"><span>🧾</span> Calculadora de Impostos e Tributos</h3>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-    <div><label class="block text-xs font-semibold uppercase text-gray-500 mb-1">Alíquota (%)</label><input id="vat-rate" type="number" step="0.5" value="20" class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white font-mono" oninput="window.calcVat()"></div>
-    <div><label class="block text-xs font-semibold uppercase text-gray-500 mb-1">Valor Líquido (Sem Imposto)</label><input id="vat-net" type="number" step="any" value="100.00" class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white font-mono" oninput="window.calcVat()"></div>
-  </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-    <div><div class="text-xs font-medium text-gray-500 dark:text-gray-400">Valor do Imposto</div><div id="vat-tax-amt" class="text-xl font-bold text-gray-800 dark:text-gray-200 mt-1 font-mono">$20.00</div></div>
-    <div><div class="text-xs font-medium text-gray-500 dark:text-gray-400">Valor Bruto (Com Imposto)</div><div id="vat-gross" class="text-2xl font-black text-blue-600 dark:text-blue-400 mt-1 font-mono">$120.00</div></div>
-  </div>
-</div>
-<script>
-(() => {
-  window.calcVat = () => {
-    const rate = (parseFloat(document.getElementById('vat-rate').value) || 0) / 100;
-    const net = parseFloat(document.getElementById('vat-net').value) || 0;
-    const tax = net * rate;
-    const gross = net + tax;
-    const fmt = (v) => '$' + v.toFixed(2);
-    document.getElementById('vat-tax-amt').textContent = fmt(tax);
-    document.getElementById('vat-gross').textContent = fmt(gross);
-  };
-  calcVat();
-})();
-</script></div>
-        <div class="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-[#e7e5e4] dark:border-[#334155] space-y-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-4 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-white/5">
-              <h3 class="font-bold text-sm mb-1 flex items-center gap-2">
-                <span style="color: #2563eb">🛡️</span> 100% Privacidade no Navegador
-              </h3>
-              <p class="text-xs opacity-75 leading-relaxed">Nenhum dado financeiro ou valor digitado é transmitido pela rede. Processamento estritamente local.</p>
-            </div>
-            <div class="p-4 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-white/5">
-              <h3 class="font-bold text-sm mb-1 flex items-center gap-2">
-                <span style="color: #2563eb">⚡</span> Velocidade Instantânea Zero Latência
-              </h3>
-              <p class="text-xs opacity-75 leading-relaxed">Respostas imediatas ao digitar via JavaScript puro.</p>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-base font-bold mb-4">Modelos Financeiros e Dúvidas Frequentes</h3>
-            <div class="space-y-3"><div class='p-4 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-white/5'><h4 class='font-bold text-sm mb-1.5'>Como calcular o valor líquido a partir do total com IVA/imposto?</h4><p class='text-xs opacity-75 leading-relaxed'>Valor Líquido = Total / (1 + Alíquota / 100), e Imposto Devido = Total - Valor Líquido.</p></div><div class='p-4 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-white/5'><h4 class='font-bold text-sm mb-1.5'>Qual é a fórmula direta de cálculo do imposto sobre vendas?</h4><p class='text-xs opacity-75 leading-relaxed'>Valor Bruto = Líquido * (1 + Alíquota / 100), e Imposto = Líquido * (Alíquota / 100).</p></div><div class='p-4 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-white/5'><h4 class='font-bold text-sm mb-1.5'>É possível utilizar alíquotas personalizadas?</h4><p class='text-xs opacity-75 leading-relaxed'>Sim, qualquer percentual pode ser informado para cálculo instantâneo.</p></div></div>
-          </div>
-        </div>
-        </div></div>
-  </main>
+  <main class="flex-grow"><style>.audit-tool{max-width:900px;margin:24px auto;padding:24px;border:1px solid #64748b;border-radius:16px}.audit-tool h1{font-size:1.6rem;font-weight:800;margin-bottom:16px}.audit-tool p{margin:12px 0;line-height:1.6}.audit-tool label{display:block;margin:14px 0;font-weight:600}.audit-tool input,.audit-tool select,.audit-tool textarea{display:block;width:100%;max-width:100%;padding:10px;margin-top:6px;border:1px solid #64748b;border-radius:8px;background:#fff;color:#0f172a}.audit-tool input[type=checkbox]{display:inline;width:auto}.audit-tool button{padding:10px 18px;margin:12px 8px 12px 0;background:#0369a1;color:white;border-radius:8px}.audit-tool button:disabled{opacity:.4}.audit-tool pre,.audit-tool output{display:block;white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;border:1px solid #64748b;border-radius:8px;margin:12px 0}.audit-tool table{width:100%;text-align:left}.audit-tool th,.audit-tool td{padding:8px;border-bottom:1px solid #64748b}.audit-tool [role=status]{color:#c2410c}.audit-tool .preview{margin:48px auto;width:180px;height:100px;background:white;border:1px solid #64748b}</style><section class="audit-tool"><h1>Calculadora de Tributos e Impostos (Direta e Reversa)</h1><p>Estimate bonus take-home using your chosen withholding rate. The default 22% is an example only. Excludes state/local taxes, Social Security and Medicare; withholding is not final income tax.</p><label for="bonus-gross">Gross bonus ($)<input id="bonus-gross" type="number" value="1000" min="0" step="0.01"></label><label for="bonus-rate">Withholding rate (%)<input id="bonus-rate" type="number" value="22" min="0" max="100" step="0.01"></label><output id="bonus-output" aria-live="polite"></output><p id="tool-status" role="status" aria-live="polite"></p></section><script src="/tool-bonus.js" defer></script></main>
 
   <!-- Institutional Compliance & Audit Footer -->
   <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 py-10 text-xs">

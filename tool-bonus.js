@@ -1,0 +1,6 @@
+/* Audited tool implementation. User content is only rendered as text. */
+(function(){
+'use strict';
+const $=id=>document.getElementById(id),isZh=document.documentElement.lang.startsWith('zh'),msg=$('tool-status');const say=(en,zh)=>isZh?zh:en;function numeric(id,min=0,max=Infinity){const e=$(id),n=Number(e.value);if(e.value.trim()===''||!Number.isFinite(n)||n<min||n>max)throw Error(say('Enter valid values for all fields.','请为所有字段输入有效数值。'));return n;}function copy(id){navigator.clipboard.writeText($(id).textContent).then(()=>{msg.textContent=say('Copied.','已复制。')}).catch(()=>{msg.textContent=say('Select the result and copy it manually.','请选择结果并手动复制。')});}
+function render(){try{const gross=numeric('bonus-gross'),rate=numeric('bonus-rate',0,100);const tax=Math.round(gross*rate)/100,net=Math.round((gross-tax)*100)/100;if(!Number.isFinite(tax)||!Number.isFinite(net))throw Error(say('Values are too large.','数值过大。'));$('bonus-output').textContent=say('Withheld: $','预扣税：$')+tax.toFixed(2)+'\n'+say('Net bonus: $','奖金净额：$')+net.toFixed(2);msg.textContent='';}catch(e){$('bonus-output').textContent='';msg.textContent=e.message;}}$('bonus-gross').oninput=render;$('bonus-rate').oninput=render;render();
+})();
