@@ -543,6 +543,8 @@
   </div>
 </div>
 
+<p class="max-w-5xl mx-auto p-4 text-sm">Schätzung 2026 mit Standardabzügen; ohne Gutschriften und Sonderabzüge. <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf">IRS Rev. Proc. 2025-32</a> · <a href="https://www.irs.gov/pub/irs-pdf/p15.pdf">IRS Publication 15 (2026)</a></p>
+<script src="/paycalc-2026.js"></script>
 <script>
 (function() {
   const inpGross = document.getElementById('inp-gross');
@@ -569,35 +571,13 @@
     const status = selStatus.value;
     const freq = selFreq.value;
 
-    const stdDed = status === 'married' ? 29200 : (status === 'hoh' ? 21900 : 14600);
+    const stdDed = PayCalc2026.standard[status];
     const taxable = Math.max(0, gross - pretax - stdDed);
 
-    // US 2026 Progressive Federal Tax Brackets
-    let fedTax = 0;
-    if (status === 'married') {
-      const b = [[23200, 0.10], [94300, 0.12], [201050, 0.22], [383900, 0.24], [487450, 0.32], [731200, 0.35]];
-      let prev = 0;
-      for (const [cap, rate] of b) {
-        if (taxable > prev) {
-          fedTax += (Math.min(taxable, cap) - prev) * rate;
-          prev = cap;
-        }
-      }
-      if (taxable > 731200) fedTax += (taxable - 731200) * 0.37;
-    } else {
-      const b = [[11600, 0.10], [47150, 0.12], [100525, 0.22], [191950, 0.24], [243725, 0.32], [609350, 0.35]];
-      let prev = 0;
-      for (const [cap, rate] of b) {
-        if (taxable > prev) {
-          fedTax += (Math.min(taxable, cap) - prev) * rate;
-          prev = cap;
-        }
-      }
-      if (taxable > 609350) fedTax += (taxable - 609350) * 0.37;
-    }
+    const fedTax = PayCalc2026.incomeTax(taxable, status);
 
-    // FICA (Social Security 6.2% up to $168,600 cap, Medicare 1.45%)
-    const ssWage = Math.min(gross, 168600);
+    // FICA (Social Security 6.2% up to $184,500 cap, Medicare 1.45%)
+    const ssWage = Math.min(gross, PayCalc2026.socialSecurityWageBase);
     const ssTax = ssWage * 0.062;
     let medTax = gross * 0.0145;
     if (gross > (status === 'married' ? 250000 : 200000)) {

@@ -403,258 +403,50 @@
     
 
     
-<div class="max-w-5xl mx-auto">
-  <div class="bg-white dark:bg-[#1e293b] rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-none border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] p-4 sm:p-6 md:p-8">
-    <div class="border-b border-[#e7e5e4] dark:border-[#334155] pb-4 sm:pb-6">
-      <div class="flex items-center justify-between mb-2 sm:mb-3">
-        <div class="inline-flex items-center px-2 py-0.5 rounded text-[11px] bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium font-mono">
-          <span>Codec URL et URI RFC 3986</span>
-        </div>
-        <span class="text-[10px] sm:text-[11px] font-mono opacity-50">100% Côté Client • Analyseur de Paramètres GET</span>
-      </div>
-      <h1 class="text-xl sm:text-2xl md:text-3xl font-black tracking-tight">Convertisseur Taux Horaire en Salaire Mensuel et Annuel</h1>
-      <p class="text-xs sm:text-sm opacity-70 mt-1.5 leading-relaxed">Convertissez facilement votre taux horaire en salaire brut mensuel ou annuel, en prenant en compte les heures sup.</p>
-    </div>
-
-    <!-- Controls Bar -->
-    <div class="mt-6 flex flex-wrap items-center justify-between gap-2.5 p-3 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/5 dark:bg-white/5">
-      <div class="flex flex-wrap items-center gap-2">
-        <button id="btn-encode-comp" class="px-3 py-1.5 text-xs rounded-lg font-mono font-bold bg-[#0f172a] hover:bg-[#334155] dark:bg-[#2563eb] dark:hover:bg-[#1d4ed8] text-white font-semibold transition">Encoder Composant</button>
-        <button id="btn-encode-full" class="px-3 py-1.5 text-xs rounded-lg font-mono border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] hover:bg-white/10 transition">Encoder URL Complète</button>
-        <button id="btn-decode" class="px-3 py-1.5 text-xs rounded-lg font-mono border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] hover:bg-white/10 transition">Décoder URL</button>
-        <button id="btn-sample" class="px-3 py-1.5 text-xs rounded-lg font-mono border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] hover:bg-white/10 transition opacity-80">Charger Exemple d’URL</button>
-      </div>
-      <div class="flex items-center space-x-2">
-        <button id="btn-copy" class="px-3 py-1.5 text-xs rounded-lg font-mono font-bold border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] hover:bg-white/10 transition flex items-center space-x-1">
-          <span id="copy-text">Copier Résultat</span>
-        </button>
-        <button id="btn-clear" class="px-2.5 py-1.5 text-xs rounded-lg font-mono opacity-70 hover:opacity-100 hover:bg-red-500/20 text-red-400 transition">Tout Effacer</button>
-      </div>
-    </div>
-
-    <!-- Dual Workspace Input / Output -->
-    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex flex-col">
-        <div class="flex items-center justify-between text-xs font-mono opacity-70 mb-1.5 px-1">
-          <span>Données d’Entrée</span>
-          <span id="input-stats">0 caractères</span>
-        </div>
-        <div id="drop-zone" class="relative flex-grow">
-          <textarea id="url-input" placeholder="Collez l’URL ou la chaîne ici (ou glissez un fichier)..." class="w-full h-48 sm:h-64 p-3.5 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/20 text-xs font-mono focus:outline-none focus:ring-1 focus:ring-emerald-500 resize-y leading-relaxed"></textarea>
-        </div>
-      </div>
-
-      <div class="flex flex-col">
-        <div class="flex items-center justify-between text-xs font-mono opacity-70 mb-1.5 px-1">
-          <span>Résultat Traité</span>
-          <span id="output-stats">0 caractères</span>
-        </div>
-        <textarea id="url-output" readonly placeholder="Le résultat apparaîtra ici..." class="w-full h-48 sm:h-64 p-3.5 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/30 text-xs font-mono opacity-90 focus:outline-none resize-y leading-relaxed"></textarea>
-      </div>
-    </div>
-
-    <!-- Parsed Query Parameters Table -->
-    <div class="mt-6 p-4 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/10 dark:bg-white/5">
-      <div class="flex items-center justify-between mb-3 border-b border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] pb-2">
-        <h3 class="text-xs font-bold uppercase tracking-wider font-mono opacity-80">Paramètres de Requête Extraits</h3>
-        <span id="params-count" class="text-[10px] font-mono opacity-60">0 parameters</span>
-      </div>
-      <div id="params-table-container" class="overflow-x-auto">
-        <p class="text-xs font-mono opacity-50 py-3">Aucun paramètre GET détecté dans l’URL.</p>
-      </div>
-    </div>
-
-    <!-- SEO & Content is King Section -->
-    <div class="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-[#e7e5e4] dark:border-[#334155] grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-      <div>
-        <h2 class="text-sm sm:text-base font-bold mb-2 sm:mb-2.5">Convertisseur Taux Horaire en Salaire Mensuel et Annuel</h2>
-        <p class="text-xs opacity-75 leading-relaxed mb-4">
-          Welcome to the high-efficiency browser utility for <strong>convertir taux horaire en salaire annuel</strong>. All encoding, percent-escaping, and parameter parsing computations execute in your local browser sandbox with zero telemetry.
-        </p>
-        <h3 class="text-xs font-bold uppercase tracking-wider opacity-70 mb-2">Guide d’Utilisation Pas à Pas</h3>
-        <ol class="text-xs opacity-75 space-y-1.5 font-mono list-decimal list-inside mb-4">
-          <li>Paste or drag-and-drop any URL or query string into the input workspace.</li>
-          <li>Choose <strong>Encoder Composant</strong> for parameters or <strong>Décoder URL</strong> for raw links.</li>
-          <li>Inspect parsed GET query parameters in the visual table below and click copy.</li>
-        </ol>
-        <h3 class="text-xs font-bold uppercase tracking-wider opacity-70 mb-2">Related Search Queries</h3>
-        <ul class="space-y-0.5"><li class='flex items-center text-xs opacity-75 py-1 font-mono'><span class='mr-2' style='color:#2563eb'>+</span>convertir taux horaire en salaire annuel</li><li class='flex items-center text-xs opacity-75 py-1 font-mono'><span class='mr-2' style='color:#2563eb'>+</span>calculer salaire mensuel par heure</li></ul>
-      </div>
-      <div>
-        <h2 class="text-sm sm:text-base font-bold mb-2 sm:mb-2.5">Foire Aux Questions & Guide Technique</h2>
-        <div class="space-y-2.5">
-          <div class="p-3.5 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/5 dark:bg-white/5">
-            <h4 class="text-xs font-bold mb-1">What is the difference between encodeURI and encodeURIComponent?</h4>
-            <p class="text-[11px] opacity-70 leading-relaxed">
-              <code>encodeURI</code> preserves protocol and path delimiters like <code>/</code>, <code>:</code>, <code>?</code>, and <code>#</code>, while <code>encodeURIComponent</code> encodes all special punctuation so the string can be safely inserted as a query parameter value.
-            </p>
-          </div>
-          <div class="p-3.5 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/5 dark:bg-white/5">
-            <h4 class="text-xs font-bold mb-1">Confidentialité 100% Locale</h4>
-            <p class="text-[11px] opacity-70 leading-relaxed">Vos données ne quittent jamais votre navigateur. Traitement sécurisé garanti.</p>
-          </div>
-          <div class="p-3.5 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/5 dark:bg-white/5">
-            <h4 class="text-xs font-bold mb-1">Exécution Instantanée Côté Client</h4>
-            <p class="text-[11px] opacity-70 leading-relaxed">Exécuté par les API JavaScript natives du navigateur en moins d’une milliseconde.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<section class="max-w-5xl mx-auto p-6 rounded-xl border bg-white dark:bg-slate-900">
+<h1 class="text-2xl font-bold">Convertisseur Taux Horaire en Salaire Mensuel et Annuel</h1>
+<p class="text-sm my-4">Salaire brut à horaire fixe ; hors impôts et majorations des heures supplémentaires.</p>
+<div class="grid sm:grid-cols-2 gap-4">
+<label>Période<select id="pay-frequency" class="block w-full p-2 border rounded bg-white dark:bg-slate-800">
+<option value="hourly">Horaire</option>
+<option value="annual">Annuel</option>
+</select>
+</label>
+<label>Montant<input type="number" step="any" id="pay-amount" value="25" class="block w-full p-2 border rounded bg-white dark:bg-slate-800">
+</label>
+<label>Heures payées par semaine<input type="number" step="any" id="pay-hours" value="40" class="block w-full p-2 border rounded bg-white dark:bg-slate-800">
+</label>
+<label>Semaines payées par an<input type="number" step="any" id="pay-weeks" value="52" class="block w-full p-2 border rounded bg-white dark:bg-slate-800">
+</label>
 </div>
-
+<div class="grid sm:grid-cols-4 gap-4 my-6" aria-live="polite">
+<div>Salaire horaire<output id="pay-hourly" class="block text-2xl font-bold">-</output>
+</div>
+<div>Salaire hebdomadaire<output id="pay-weekly" class="block text-2xl font-bold">-</output>
+</div>
+<div>Moyenne mensuelle<output id="pay-monthly" class="block text-2xl font-bold">-</output>
+</div>
+<div>Salaire annuel<output id="pay-annual" class="block text-2xl font-bold">-</output>
+</div>
+</div>
+</section>
 <script>
-(function() {
-  const inputEl = document.getElementById('url-input');
-  const outputEl = document.getElementById('url-output');
-  const btnComp = document.getElementById('btn-encode-comp');
-  const btnFull = document.getElementById('btn-encode-full');
-  const btnDecode = document.getElementById('btn-decode');
-  const btnSample = document.getElementById('btn-sample');
-  const btnCopy = document.getElementById('btn-copy');
-  const copyText = document.getElementById('copy-text');
-  const btnClear = document.getElementById('btn-clear');
-  const inStats = document.getElementById('input-stats');
-  const outStats = document.getElementById('output-stats');
-  const paramsTable = document.getElementById('params-table-container');
-  const paramsCount = document.getElementById('params-count');
-  const dropZone = document.getElementById('drop-zone');
-
-  function updateStats() {
-    const inLen = inputEl.value.length;
-    const outLen = outputEl.value.length;
-    inStats.innerText = inLen + " caractères";
-    outStats.innerText = outLen + " caractères";
-    parseQueryParams(inputEl.value);
+(() => {
+  const ids = ['pay-amount', 'pay-hours', 'pay-weeks'];
+  const inputs = ids.map(id => document.getElementById(id));
+  const mode = document.getElementById('pay-frequency');
+  const outputs = ['hourly', 'weekly', 'monthly', 'annual'].map(id => document.getElementById('pay-' + id));
+  function calculate() {
+    const [amount, hours, weeks] = inputs.map(input => input.value.trim() === '' ? NaN : Number(input.value));
+    const valid = [Number.isFinite(amount) && amount >= 0, Number.isFinite(hours) && hours > 0 && hours <= 168,
+      Number.isFinite(weeks) && weeks > 0 && weeks <= 52];
+    inputs.forEach((input, i) => input.setAttribute('aria-invalid', String(!valid[i])));
+    const annual = mode.value === 'annual' ? amount : amount * hours * weeks;
+    if (!valid.every(Boolean) || !Number.isFinite(annual)) { outputs.forEach(el => { el.textContent = '-'; }); return; }
+    [annual / (hours * weeks), annual / weeks, annual / 12, annual].forEach((value, i) => { outputs[i].textContent = value.toFixed(2); });
   }
-
-  function parseQueryParams(str) {
-    try {
-      let searchPart = "";
-      if (str.includes('?')) {
-        searchPart = str.split('?')[1].split('#')[0];
-      } else if (str.includes('=')) {
-        searchPart = str;
-      }
-      if (!searchPart) {
-        paramsTable.innerHTML = '<p class="text-xs font-mono opacity-50 py-3">Aucun paramètre GET détecté dans l’URL.</p>';
-        paramsCount.innerText = "0 parameters";
-        return;
-      }
-      const params = new URLSearchParams(searchPart);
-      let count = 0;
-      let rows = "";
-      for (const [k, v] of params.entries()) {
-        count++;
-        rows += '<tr class="border-b border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb]/40 hover:bg-white/5">' +
-          '<td class="py-1.5 px-2 font-bold opacity-90 text-brand break-all">' + escapeHtml(k) + '</td>' +
-          '<td class="py-1.5 px-2 opacity-80 break-all">' + escapeHtml(v) + '</td>' +
-          '</tr>';
-      }
-      if (count > 0) {
-        paramsCount.innerText = count + " parameters";
-        paramsTable.innerHTML = '<table class="w-full text-left font-mono text-xs">' +
-          '<thead><tr class="border-b border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] opacity-50 text-[10px] uppercase">' +
-          '<th class="py-1 px-2">Nom du Paramètre</th><th class="py-1 px-2">Valeur</th></tr></thead>' +
-          '<tbody>' + rows + '</tbody></table>';
-      } else {
-        paramsTable.innerHTML = '<p class="text-xs font-mono opacity-50 py-3">Aucun paramètre GET détecté dans l’URL.</p>';
-        paramsCount.innerText = "0 parameters";
-      }
-    } catch(e) {
-      paramsTable.innerHTML = '<p class="text-xs font-mono opacity-50 py-3">Aucun paramètre GET détecté dans l’URL.</p>';
-      paramsCount.innerText = "0 parameters";
-    }
-  }
-
-  function escapeHtml(s) {
-    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-  }
-
-  if (btnComp) {
-    btnComp.addEventListener('click', () => {
-      outputEl.value = encodeURIComponent(inputEl.value);
-      updateStats();
-    });
-  }
-
-  if (btnFull) {
-    btnFull.addEventListener('click', () => {
-      outputEl.value = encodeURI(inputEl.value);
-      updateStats();
-    });
-  }
-
-  if (btnDecode) {
-    btnDecode.addEventListener('click', () => {
-      try {
-        outputEl.value = decodeURIComponent(inputEl.value.replace(/\+/g, ' '));
-      } catch(e) {
-        try { outputEl.value = decodeURI(inputEl.value); } catch(err) { outputEl.value = "Error decoding URL: " + e.message; }
-      }
-      updateStats();
-    });
-  }
-
-  if (btnSample) {
-    btnSample.addEventListener('click', () => {
-      inputEl.value = "https://example.com/search?q=developer+tools&category=web&ref=github&timestamp=" + Date.now();
-      outputEl.value = encodeURIComponent(inputEl.value);
-      updateStats();
-    });
-  }
-
-  if (btnClear) {
-    btnClear.addEventListener('click', () => {
-      inputEl.value = '';
-      outputEl.value = '';
-      updateStats();
-    });
-  }
-
-  if (btnCopy) {
-    btnCopy.addEventListener('click', () => {
-      const text = outputEl.value || inputEl.value;
-      if (!text) return;
-      navigator.clipboard.writeText(text).then(() => {
-        copyText.innerText = "✓ Copied!";
-        btnCopy.classList.add('bg-emerald-500/20', 'text-emerald-400');
-        setTimeout(() => {
-          copyText.innerText = "Copier Résultat";
-          btnCopy.classList.remove('bg-emerald-500/20', 'text-emerald-400');
-        }, 1500);
-      });
-    });
-  }
-
-  // Drag and drop support (FileReader)
-  if (dropZone) {
-    ['dragenter', 'dragover'].forEach(name => {
-      dropZone.addEventListener(name, (e) => {
-        e.preventDefault();
-        inputEl.classList.add('border-emerald-500', 'bg-emerald-500/10');
-      });
-    });
-    ['dragleave', 'drop'].forEach(name => {
-      dropZone.addEventListener(name, (e) => {
-        e.preventDefault();
-        inputEl.classList.remove('border-emerald-500', 'bg-emerald-500/10');
-      });
-    });
-    dropZone.addEventListener('drop', (e) => {
-      const files = e.dataTransfer.files;
-      if (files.length > 0) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          inputEl.value = event.target.result;
-          updateStats();
-        };
-        reader.readAsText(files[0]);
-      }
-    });
-  }
-
-  inputEl.addEventListener('input', updateStats);
+  inputs.forEach(input => input.addEventListener('input', calculate));
+  mode.addEventListener('change', calculate); calculate();
 })();
 </script>
         

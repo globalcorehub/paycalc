@@ -403,148 +403,31 @@
     
 
     
-<div class="max-w-5xl mx-auto">
-  <div class="bg-white dark:bg-[#1e293b] rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:shadow-none border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] p-4 sm:p-6 md:p-8">
-    <div class="border-b border-[#e7e5e4] dark:border-[#334155] pb-4 sm:pb-6">
-      <div class="flex items-center justify-between mb-2 sm:mb-3">
-        <div class="inline-flex items-center px-2 py-0.5 rounded text-[11px] bg-[#f1f5f9] dark:bg-[#334155] text-[#334155] dark:text-[#94a3b8] font-medium font-mono">
-          <span>PX zu REM & EM Umrechner</span>
-        </div>
-        <span class="text-[10px] sm:text-[11px] font-mono opacity-50">Bidirektionale Umrechnung mit anpassbarer Basis (16px)</span>
-      </div>
-      <h1 class="text-xl sm:text-2xl md:text-3xl font-black tracking-tight">401(k) Altersvorsorge-Rechner - Zinseszins & Arbeitgeberzuschuss</h1>
-      <p class="text-xs sm:text-sm opacity-70 mt-1.5 leading-relaxed">Berechnen Sie Ihr Altersvorsorgekapital unter Berücksichtigung von Sparraten, Arbeitgeberbeiträgen und Zinseszins.</p>
-    </div>
-
-    <!-- Base Font Selector -->
-    <div class="mt-6 p-4 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/5 dark:bg-white/5 font-mono text-xs flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <span class="font-bold opacity-80">Basis-Schriftgröße (px):</span>
-        <input type="number" id="base-px" value="16" min="8" max="32" class="w-16 p-1.5 rounded border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/20 text-center font-bold">
-      </div>
-      <div class="space-x-1">
-        <button id="set-16" class="px-2 py-1 rounded border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] font-bold bg-brand/10 text-brand">16px</button>
-        <button id="set-14" class="px-2 py-1 rounded border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] hover:bg-white/10">14px</button>
-        <button id="set-10" class="px-2 py-1 rounded border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] hover:bg-white/10">10px</button>
-      </div>
-    </div>
-
-    <!-- Bidirectional Converter Inputs -->
-    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
-      <div class="p-4 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/10 dark:bg-white/5">
-        <label class="block font-bold mb-2 opacity-80">Pixel (PX):</label>
-        <input type="number" id="input-px" value="24" step="any" class="w-full p-3 rounded-lg border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/20 text-lg font-bold">
-      </div>
-
-      <div class="p-4 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/10 dark:bg-white/5">
-        <label class="block font-bold mb-2 opacity-80">REM-Einheit:</label>
-        <input type="number" id="input-rem" value="1.5" step="any" class="w-full p-3 rounded-lg border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/20 text-lg font-bold text-brand">
-      </div>
-    </div>
-
-    <!-- Common Responsive Scale Reference Table -->
-    <div class="mt-6 p-4 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/10 dark:bg-white/5 font-mono text-xs overflow-x-auto">
-      <h3 class="text-xs font-bold uppercase tracking-wider opacity-70 mb-3">Common Tailwind & Typography Scale Quick Reference</h3>
-      <table class="w-full text-left">
-        <thead>
-          <tr class="border-b border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] opacity-50 text-[10px]">
-            <th class="py-1 px-2">Scale</th>
-            <th class="py-1 px-2">Pixel (PX)</th>
-            <th class="py-1 px-2">Root (REM)</th>
-            <th class="py-1 px-2">Quick Action</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb]/40" id="scale-table-body">
-          <!-- Populated by JS -->
-        </tbody>
-      </table>
-    </div>
-
-    <!-- SEO & Content is King Section -->
-    <div class="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-[#e7e5e4] dark:border-[#334155] grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-      <div>
-        <h2 class="text-sm sm:text-base font-bold mb-2 sm:mb-2.5">401(k) Altersvorsorge-Rechner - Zinseszins & Arbeitgeberzuschuss</h2>
-        <p class="text-xs opacity-75 leading-relaxed mb-4">
-          Online, zero-lag unit calculator for <strong>altersvorsorge rechner zinseszins</strong>. Quickly convert static pixel values into fluid, responsive REM and EM units for modern CSS web development.
-        </p>
-        <h3 class="text-xs font-bold uppercase tracking-wider opacity-70 mb-2">Schritt-für-Schritt Anleitung</h3>
-        <ol class="text-xs opacity-75 space-y-1.5 font-mono list-decimal list-inside mb-4">
-          <li>Verify your base root font size (standard browser default is 16px).</li>
-          <li>Enter any pixel number to instantly receive the corresponding REM value.</li>
-          <li>Reverse convert by typing into the REM input box.</li>
-        </ol>
-        <h3 class="text-xs font-bold uppercase tracking-wider opacity-70 mb-2">Target Search Queries</h3>
-        <ul class="space-y-0.5"><li class='flex items-center text-xs opacity-75 py-1 font-mono'><span class='mr-2' style='color:#2563eb'>+</span>altersvorsorge rechner zinseszins</li><li class='flex items-center text-xs opacity-75 py-1 font-mono'><span class='mr-2' style='color:#2563eb'>+</span>401k rechner vermoegensaufbau</li></ul>
-      </div>
-      <div>
-        <h2 class="text-sm sm:text-base font-bold mb-2 sm:mb-2.5">Häufig Gestellte Fragen & CSS Leitfaden</h2>
-        <div class="space-y-2.5">
-          <div class="p-3.5 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/5 dark:bg-white/5">
-            <h4 class="text-xs font-bold mb-1">Why use REM units instead of fixed PX?</h4>
-            <p class="text-[11px] opacity-70 leading-relaxed">
-              REM units scale proportionately with user browser font preferences, improving accessibility for visually impaired users and preventing layout clipping.
-            </p>
-          </div>
-          <div class="p-3.5 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/5 dark:bg-white/5">
-            <h4 class="text-xs font-bold mb-1">100% Lokaler Datenschutz</h4>
-            <p class="text-[11px] opacity-70 leading-relaxed">Alle Berechnungen finden direkt im Speicher Ihres Browsers statt.</p>
-          </div>
-          <div class="p-3.5 rounded-xl border border-[#e2e8f0] dark:border-[#334155] hover:border-[#2563eb] bg-black/5 dark:bg-white/5">
-            <h4 class="text-xs font-bold mb-1">60 FPS Flüssige Reaktion</h4>
-            <p class="text-[11px] opacity-70 leading-relaxed">Sofortige visuelle Rückmeldung ohne Netzwerkverzögerung.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<section data-paycalc="retirement" class="max-w-5xl mx-auto p-6 border rounded-xl bg-white dark:bg-slate-900">
+<h1 class="text-2xl font-bold">401(k) Altersvorsorge-Rechner - Zinseszins & Arbeitgeberzuschuss</h1>
+<p class="text-sm my-4">Grenzen und Matchingregeln Ihres Plans eingeben. Gesetzliche Grenzen und Unverfallbarkeit werden nicht geprüft.</p>
+<div class="grid sm:grid-cols-2 gap-4">
+<label>Jährliches berechtigtes Gehalt<input id="calc-salary" type="number" min="0" step="any" value="100000" class="block w-full p-2 border rounded bg-white dark:bg-slate-800">
+</label>
+<label>Arbeitnehmerbeitrag (%)<input id="calc-contribution" type="number" min="0" step="any" value="10" class="block w-full p-2 border rounded bg-white dark:bg-slate-800">
+</label>
+<label>Jährliche Beitragsgrenze des Plans<input id="calc-limit" type="number" min="0" step="any" value="" class="block w-full p-2 border rounded bg-white dark:bg-slate-800">
+</label>
+<label>Arbeitgeber-Matching (%)<input id="calc-matchrate" type="number" min="0" step="any" value="50" class="block w-full p-2 border rounded bg-white dark:bg-slate-800">
+</label>
+<label>Matchingfähiger Gehaltsanteil (%)<input id="calc-matchcap" type="number" min="0" step="any" value="6" class="block w-full p-2 border rounded bg-white dark:bg-slate-800">
+</label>
 </div>
-
-<script>
-(function() {
-  const baseInput = document.getElementById('base-px');
-  const pxInput = document.getElementById('input-px');
-  const remInput = document.getElementById('input-rem');
-  const tableBody = document.getElementById('scale-table-body');
-
-  function renderTable() {
-    const base = parseFloat(baseInput.value) || 16;
-    const scales = [12, 14, 16, 18, 20, 24, 32, 48, 64];
-    let html = '';
-    scales.forEach(px => {
-      const rem = (px / base).toFixed(3).replace(/\.?0+$/, '');
-      html += `<tr class="hover:bg-white/5">
-        <td class="py-1.5 px-2 font-bold">${px >= 24 ? 'Heading' : 'Body / UI'}</td>
-        <td class="py-1.5 px-2">${px}px</td>
-        <td class="py-1.5 px-2 text-brand font-bold">${rem}rem</td>
-        <td class="py-1.5 px-2"><button onclick="document.getElementById('input-px').value=${px};document.getElementById('input-px').dispatchEvent(new Event('input'))" class="underline opacity-60 hover:opacity-100">Apply</button></td>
-      </tr>`;
-    });
-    tableBody.innerHTML = html;
-  }
-
-  pxInput.oninput = () => {
-    const base = parseFloat(baseInput.value) || 16;
-    const px = parseFloat(pxInput.value) || 0;
-    remInput.value = (px / base).toFixed(4).replace(/\.?0+$/, '');
-  };
-
-  remInput.oninput = () => {
-    const base = parseFloat(baseInput.value) || 16;
-    const rem = parseFloat(remInput.value) || 0;
-    pxInput.value = (rem * base).toFixed(2).replace(/\.?0+$/, '');
-  };
-
-  baseInput.oninput = () => {
-    pxInput.dispatchEvent(new Event('input'));
-    renderTable();
-  };
-
-  document.getElementById('set-16').onclick = () => { baseInput.value = 16; baseInput.dispatchEvent(new Event('input')); };
-  document.getElementById('set-14').onclick = () => { baseInput.value = 14; baseInput.dispatchEvent(new Event('input')); };
-  document.getElementById('set-10').onclick = () => { baseInput.value = 10; baseInput.dispatchEvent(new Event('input')); };
-
-  renderTable();
-})();
+<div class="grid sm:grid-cols-2 gap-4 my-6" aria-live="polite">
+<div>Arbeitnehmerbeitrag<output id="calc-employee" class="block text-xl font-bold">-</output>
+</div>
+<div>Arbeitgeberbeitrag<output id="calc-employer" class="block text-xl font-bold">-</output>
+</div>
+<div>Gesamtbeitrag<output id="calc-combined" class="block text-xl font-bold">-</output>
+</div>
+</div>
+</section>
+<script src="/paycalc-2026.js">
 </script>
         
   </main>
